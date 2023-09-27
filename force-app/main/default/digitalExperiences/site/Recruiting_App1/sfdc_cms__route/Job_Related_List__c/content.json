@@ -1,0 +1,11 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Job Related List",
+  "contentBody" : {
+    "activeViewId" : "Job_Related_List",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "relatedlist-a01",
+    "urlPrefix" : "job"
+  }
+}
