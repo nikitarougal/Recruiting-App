@@ -8,10 +8,37 @@
           "attributes" : {
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "sectionConfig" : "{\"UUID\":\"7045c7ae-6ed3-4a5c-90a0-36f03fa25149\",\"columns\":[{\"UUID\":\"2e221b5d-7539-4c2f-8b85-13c1caa8b777\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+          },
+          "children" : [ {
+            "id" : "2e221b5d-7539-4c2f-8b85-13c1caa8b777",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "7045c7ae-6ed3-4a5c-90a0-36f03fa25149",
+          "type" : "component"
+        }, {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "sectionConfig" : "{\"UUID\":\"9a180d8f-f013-418e-8203-548bd85b0501\",\"columns\":[{\"UUID\":\"092a18be-21e5-4745-8838-a2035cbd6731\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
           },
           "children" : [ {
             "children" : [ {
+              "attributes" : {
+                "alignment" : "center",
+                "size" : "standard",
+                "stretch" : "standard",
+                "text" : "Button",
+                "type" : "primary",
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{}}}}"
+              },
+              "definition" : "dxp_base:button",
+              "id" : "7bdde038-1ad4-4e9b-88fd-8a533a69316c",
+              "type" : "component"
+            }, {
               "attributes" : {
                 "backgroundColor" : "",
                 "mainTitlePaddingHorizontal" : "none",
@@ -34,6 +61,22 @@
               } ],
               "definition" : "dxp_records:detailPanel",
               "id" : "b115cdee-4213-4b1d-9ce5-45cc2b7a1466",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "dxpStyle" : {
+                  "margin" : {
+                    "bottom" : "2%",
+                    "left" : "20%",
+                    "right" : "20%",
+                    "top" : "3%"
+                  }
+                },
+                "flowArguments" : "[{\"label\":\"JobId\",\"dataType\":\"String\",\"supportsRecordId\":true,\"inputType\":\"text\",\"name\":\"JobId\",\"type\":\"String\",\"value\":\"{!Item.Id}\"}]",
+                "flowName" : "{\"flowName\":\"Apply_For_Job\",\"flowLabel\":\"Apply For Job\"}"
+              },
+              "definition" : "dxp_flow:flow",
+              "id" : "96bd4676-720e-4134-8d85-34eb1a0ffdd2",
               "type" : "component"
             } ],
             "id" : "092a18be-21e5-4745-8838-a2035cbd6731",
