@@ -1,6 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>58.0</apiVersion>
+    <assignments>
+        <name>Answers_from_test</name>
+        <label>Answers from test</label>
+        <locationX>50</locationX>
+        <locationY>674</locationY>
+        <assignmentItems>
+            <assignToReference>Response1</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>X1_What_word_would_people_close_to_you_use_to_describe_you</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Response2</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>X2_What_is_a_question_people_ask_you_often</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Response3</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>X3_Who_is_your_hero</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Response4</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>X4_What_do_you_consider_your_greatest_accomplishment</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Response5</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>X5_How_do_you_deal_with_failure</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Concatenated_Response</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Create_Concatenated_Response</name>
+        <label>Create Concatenated Response</label>
+        <locationX>50</locationX>
+        <locationY>782</locationY>
+        <assignmentItems>
+            <assignToReference>Response</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Test_Responses</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_Personality_Test</targetReference>
+        </connector>
+    </assignments>
+    <constants>
+        <name>ContinueApplication</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Continue Application</stringValue>
+        </value>
+    </constants>
+    <constants>
+        <name>FinishApplication</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Finish Application</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <name>Continue_Or_Finish_Application</name>
+        <label>Continue Or Finish Application</label>
+        <locationX>182</locationX>
+        <locationY>458</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Continue_Flow</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>More_information_toggle.value</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Personality_Test</targetReference>
+            </connector>
+            <label>Continue Flow</label>
+        </rules>
+    </decisions>
     <environments>Default</environments>
     <interviewLabel>Apply For Job {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
@@ -27,8 +123,14 @@
     <recordCreates>
         <name>Create_Candidate</name>
         <label>Create Candidate</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>242</locationY>
+        <connector>
+            <targetReference>Application_Submitted</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Show_Error_Message</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Candidate_Email__c</field>
             <value>
@@ -62,11 +164,81 @@
         <object>Candidate__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordUpdates>
+        <name>Add_Personality_Test</name>
+        <label>Add Personality Test</label>
+        <locationX>50</locationX>
+        <locationY>890</locationY>
+        <connector>
+            <targetReference>Thank_you</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Create_Candidate</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Test_Responses__c</field>
+            <value>
+                <elementReference>Response</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Candidate__c</object>
+    </recordUpdates>
     <runInMode>SystemModeWithoutSharing</runInMode>
+    <screens>
+        <name>Application_Submitted</name>
+        <label>Application Submitted</label>
+        <locationX>182</locationX>
+        <locationY>350</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Continue_Or_Finish_Application</targetReference>
+        </connector>
+        <fields>
+            <name>Ask_more_info</name>
+            <fieldText>&lt;p&gt;Your application has been submitted successfully.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Would You like to give us more information about yourself?&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>More_information_toggle</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>More Information</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <elementReference>ContinueApplication</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <elementReference>FinishApplication</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <nextOrFinishButtonLabel>OK</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <name>Apply_for_Job</name>
         <label>Apply for Job</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>134</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
@@ -100,32 +272,177 @@
             <name>Candidate_Email</name>
             <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
-        </fields>
-        <fields>
-            <name>JobIdDisplay</name>
-            <fieldText>&lt;p&gt;{!JobId}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
         </fields>
         <nextOrFinishButtonLabel>Submit</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <start>
+    <screens>
+        <name>Personality_Test</name>
+        <label>Personality Test</label>
         <locationX>50</locationX>
+        <locationY>566</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Answers_from_test</targetReference>
+        </connector>
+        <fields>
+            <name>X1_What_word_would_people_close_to_you_use_to_describe_you</name>
+            <dataType>String</dataType>
+            <fieldText>1. What word would people close to you use to describe you?</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>X2_What_is_a_question_people_ask_you_often</name>
+            <dataType>String</dataType>
+            <fieldText>2. What is a question people ask you often?</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>X3_Who_is_your_hero</name>
+            <dataType>String</dataType>
+            <fieldText>3. Who is your hero?</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>X4_What_do_you_consider_your_greatest_accomplishment</name>
+            <fieldText>4. What do you consider your greatest accomplishment?</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>X5_How_do_you_deal_with_failure</name>
+            <fieldText>5. How do you deal with failure?</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <nextOrFinishButtonLabel>Submit</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Show_Error_Message</name>
+        <label>Show Error Message</label>
+        <locationX>490</locationX>
+        <locationY>350</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Error_Message_Display</name>
+            <fieldText>&lt;p&gt;{!friendliererrormessage}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <nextOrFinishButtonLabel>OK</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Thank_you</name>
+        <label>Thank you</label>
+        <locationX>50</locationX>
+        <locationY>998</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>thanks_display</name>
+            <fieldText>&lt;p&gt;Thank you for submitting your answers!&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>56</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Apply_for_Job</targetReference>
         </connector>
     </start>
     <status>Active</status>
+    <textTemplates>
+        <name>friendliererrormessage</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;pre class=&quot;ql-syntax&quot; spellcheck=&quot;false&quot;&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;Something went wrong.&amp;lt;/b&amp;gt;&amp;lt;/p&amp;gt;
+
+
+
+&lt;/pre&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>Test_Responses</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;1. What word would people close to you use to describe you?&lt;/p&gt;&lt;p&gt;{!Response1}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;2. What is a question people ask you often?&lt;/p&gt;&lt;p&gt;{!Response2}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;3. Who is your hero?&lt;/p&gt;&lt;p&gt;{!Response3}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;4. What do you consider your greatest accomplishment?&lt;/p&gt;&lt;p&gt;{!Response4}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;5. How do you deal with failure?&lt;/p&gt;&lt;p&gt;{!Response5}&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>FinishChoice</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>JobId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Response</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Response1</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Response2</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Response3</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Response4</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Response5</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
 </Flow>
