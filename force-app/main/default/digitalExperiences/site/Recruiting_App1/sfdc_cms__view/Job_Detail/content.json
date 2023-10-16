@@ -8,6 +8,7 @@
           "attributes" : {
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "dxpStyle" : { },
             "sectionConfig" : "{\"UUID\":\"7045c7ae-6ed3-4a5c-90a0-36f03fa25149\",\"columns\":[{\"UUID\":\"2e221b5d-7539-4c2f-8b85-13c1caa8b777\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
           },
           "children" : [ {
@@ -23,12 +24,14 @@
           "attributes" : {
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "dxpStyle" : { },
             "sectionConfig" : "{\"UUID\":\"9a180d8f-f013-418e-8203-548bd85b0501\",\"columns\":[{\"UUID\":\"092a18be-21e5-4745-8838-a2035cbd6731\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
           },
           "children" : [ {
             "children" : [ {
               "attributes" : {
                 "alignment" : "center",
+                "dxpStyle" : { },
                 "size" : "standard",
                 "stretch" : "standard",
                 "text" : "Button",
@@ -41,15 +44,21 @@
             }, {
               "attributes" : {
                 "backgroundColor" : "",
+                "dxpStyle" : { },
+                "layout" : "{!Item._layout}",
                 "mainTitlePaddingHorizontal" : "none",
                 "mainTitlePaddingVertical" : "none",
                 "mainTitleText" : "{!Item.Title__c}",
                 "mainTitleTextDisplayInfo" : "{\"textStyle\":\"heading-large\",\"headingTag\":\"h2\"}",
+                "metadata" : "{!Item._metadata._context}",
+                "recordIdFromDataProvider" : "{!Item.Id}",
                 "showTitle" : true
               },
               "children" : [ {
                 "children" : [ {
-                  "attributes" : { },
+                  "attributes" : {
+                    "dxpStyle" : { }
+                  },
                   "definition" : "dxp_page_layout:placeHolder",
                   "id" : "6d12470b-cdf0-4552-bf8b-0be91e21fb63",
                   "type" : "component"
@@ -97,6 +106,7 @@
           "attributes" : {
             "customHeadTags" : "",
             "description" : "",
+            "dxpStyle" : { },
             "pageTitle" : "{!Record._Object}: {!Record._Title}",
             "recordId" : "{!recordId}"
           },

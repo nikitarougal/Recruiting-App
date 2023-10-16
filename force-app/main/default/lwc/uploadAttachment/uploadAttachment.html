@@ -1,0 +1,12 @@
+<template>
+    <lightning-file-upload
+        label="Attach resume"
+        name="fileUploader"
+        accept={acceptedFormats}
+        record-id={candidateId}
+        file-field-name="Encrypted_Token_fileupload__c"
+        file-field-value={encryptedToken}
+        onuploadfinished={handleUploadFinished}
+    >
+    </lightning-file-upload>
+</template>

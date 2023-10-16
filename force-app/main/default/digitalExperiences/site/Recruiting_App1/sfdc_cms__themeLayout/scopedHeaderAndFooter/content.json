@@ -9,11 +9,13 @@
           "attributes" : {
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "dxpStyle" : { },
             "sectionConfig" : "{\"UUID\":\"9fed7692-9b8f-451c-af95-dec2523a0e88\",\"columns\":[{\"UUID\":\"09e9250d-37c7-464c-983b-aa45d60e9cbd\",\"columnName\":\"Column 1\",\"columnKey\":\"headerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
           },
           "children" : [ {
             "children" : [ {
               "attributes" : {
+                "dxpStyle" : { },
                 "richTextValue" : "<p><strong style=\"color: rgb(0, 41, 102); font-size: 36px;\">We are hiring</strong></p>"
               },
               "definition" : "community_builder:richTextEditor",
@@ -38,12 +40,14 @@
           "attributes" : {
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "dxpStyle" : { },
             "sectionConfig" : "{\"UUID\":\"f854388d-dcda-4c5b-96ea-48f081c2ec1e\",\"columns\":[{\"UUID\":\"5da912bf-a112-4037-9357-5d415527667a\",\"columnName\":\"Column 1\",\"columnKey\":\"footerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
           },
           "children" : [ {
             "children" : [ {
               "attributes" : {
                 "backgroundColor" : "",
+                "dxpStyle" : { },
                 "paddingHorizontal" : "none",
                 "paddingVertical" : "none",
                 "text" : "All Rights Reserved",

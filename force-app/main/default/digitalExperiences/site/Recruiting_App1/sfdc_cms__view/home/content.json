@@ -8,6 +8,7 @@
           "attributes" : {
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "dxpStyle" : { },
             "sectionConfig" : "{\"UUID\":\"8c5f4795-268e-4e59-ac7e-6a5997c3fc75\",\"columns\":[{\"UUID\":\"02fe0fb2-54a8-453b-b0d6-9e66d6756650\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
           },
           "children" : [ {
@@ -18,6 +19,7 @@
                 "borderColor" : "",
                 "borderRadius" : 0,
                 "borderWidth" : 0,
+                "dxpStyle" : { },
                 "itemSpacing" : "small",
                 "numberOfColumns" : 1,
                 "showPagination" : false,
@@ -46,6 +48,7 @@
                     "children" : [ {
                       "attributes" : {
                         "backgroundColor" : "",
+                        "dxpStyle" : { },
                         "paddingHorizontal" : "none",
                         "paddingVertical" : "none",
                         "text" : "{!Item.Name}",
@@ -65,6 +68,7 @@
                     "children" : [ {
                       "attributes" : {
                         "alignment" : "center",
+                        "dxpStyle" : { },
                         "size" : "standard",
                         "stretch" : "standard",
                         "text" : "Learn More",
@@ -86,6 +90,7 @@
                 }, {
                   "attributes" : {
                     "alignment" : "center",
+                    "dxpStyle" : { },
                     "lineStyle" : "solid",
                     "size" : 2,
                     "width" : 100
@@ -101,12 +106,15 @@
               }, {
                 "children" : [ {
                   "attributes" : {
+                    "dxpStyle" : { },
                     "paginatorAttributes" : "{\"nested\":{\"componentName\":\"dxp_content_layout:paginatorShowMore\",\"attributes\":{\"label\":\"Show More\",\"textDecoration\":\"{}\",\"buttonStyle\":\"secondary\",\"size\":\"standard\",\"width\":\"standard\",\"verticalPadding\":\"none\",\"horizontalAlignment\":\"center\"}}}",
                     "variant" : "showmore"
                   },
                   "children" : [ {
                     "children" : [ {
-                      "attributes" : { },
+                      "attributes" : {
+                        "dxpStyle" : { }
+                      },
                       "definition" : "dxp_page_layout:placeHolder",
                       "id" : "42dae765-5602-4120-b575-fc44ddab53da",
                       "type" : "component"
@@ -156,6 +164,7 @@
           "attributes" : {
             "customHeadTags" : "",
             "description" : "",
+            "dxpStyle" : { },
             "pageTitle" : "Home",
             "recordId" : "{!recordId}"
           },

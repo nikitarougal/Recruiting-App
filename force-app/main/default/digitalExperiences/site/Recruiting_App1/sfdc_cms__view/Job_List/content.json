@@ -8,6 +8,7 @@
           "attributes" : {
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "dxpStyle" : { },
             "sectionConfig" : "{\"UUID\":\"63eb4199-b334-4dd0-9fe9-f9b59a183640\",\"columns\":[{\"UUID\":\"c5e2e659-e2a3-4355-9a3b-c89335b67911\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
           },
           "children" : [ {
@@ -27,6 +28,7 @@
       }, {
         "children" : [ {
           "attributes" : {
+            "dxpStyle" : { },
             "recordId" : "{!recordId}"
           },
           "definition" : "community_builder:seoAssistant",
