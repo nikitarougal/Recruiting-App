@@ -1,0 +1,28 @@
+<template>
+  <lightning-card title="Save This Job">
+    <div class="slds-p-around_medium">
+      <!-- Input for email -->
+      <lightning-input
+        label="Enter email"
+        type="email"
+        value={email}
+        onchange={handleEmailChange}
+      >
+      </lightning-input>
+      <!-- Send email button -->
+      <lightning-button
+        label="Save Job"
+        title="Save Job"
+        variant="brand"
+        onclick={sendJobEmail}
+      ></lightning-button>
+      <!-- Success message div -->
+      <div if:true={successMessage} class="success-message">
+        {successMessage}
+      </div>
+
+      <!-- Error message div -->
+      <div if:true={errorMessage} class="error-message">{errorMessage}</div>
+    </div>
+  </lightning-card>
+</template>

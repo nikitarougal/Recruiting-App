@@ -16,7 +16,7 @@
             "children" : [ {
               "attributes" : {
                 "dxpStyle" : { },
-                "richTextValue" : "<p><strong style=\"color: rgb(0, 41, 102); font-size: 36px;\">We are hiring</strong></p>"
+                "richTextValue" : "<p><strong style=\"font-size: 36px; color: rgb(0, 41, 102);\">We are hiring</strong></p>"
               },
               "definition" : "community_builder:richTextEditor",
               "id" : "079617fe-feb7-4d48-ac27-b6b67d27dd2b",

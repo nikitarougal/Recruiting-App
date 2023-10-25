@@ -4,7 +4,7 @@
         <name>Email_Alert_to_HR</name>
         <label>Email Alert to HR</label>
         <locationX>50</locationX>
-        <locationY>1430</locationY>
+        <locationY>1538</locationY>
         <actionName>Job__c.Send_email_to_Job_HR</actionName>
         <actionType>emailAlert</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -17,12 +17,32 @@
         <nameSegment>Job__c.Send_email_to_Job_HR</nameSegment>
         <versionSegment>1</versionSegment>
     </actionCalls>
+    <actionCalls>
+        <name>Email_Candidate_New_Job_Application</name>
+        <label>Email Candidate New Job Application</label>
+        <locationX>182</locationX>
+        <locationY>782</locationY>
+        <actionName>Candidate__c.Email_Candidate</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Continue_Or_Finish_Application</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Create_Candidate</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Candidate__c.Email_Candidate</nameSegment>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
     <apiVersion>58.0</apiVersion>
     <assignments>
         <name>Answers_from_test</name>
         <label>Answers from test</label>
         <locationX>50</locationX>
-        <locationY>998</locationY>
+        <locationY>1106</locationY>
         <assignmentItems>
             <assignToReference>Response1</assignToReference>
             <operator>Assign</operator>
@@ -66,7 +86,7 @@
         <name>Create_Concatenated_Response</name>
         <label>Create Concatenated Response</label>
         <locationX>50</locationX>
-        <locationY>1106</locationY>
+        <locationY>1214</locationY>
         <assignmentItems>
             <assignToReference>Response</assignToReference>
             <operator>Assign</operator>
@@ -96,7 +116,7 @@
         <name>Continue_Or_Finish_Application</name>
         <label>Continue Or Finish Application</label>
         <locationX>182</locationX>
-        <locationY>782</locationY>
+        <locationY>890</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Continue_Flow</name>
@@ -239,7 +259,7 @@
         <name>Add_Personality_Test</name>
         <label>Add Personality Test</label>
         <locationX>50</locationX>
-        <locationY>1214</locationY>
+        <locationY>1322</locationY>
         <connector>
             <targetReference>Thank_you</targetReference>
         </connector>
@@ -275,7 +295,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Continue_Or_Finish_Application</targetReference>
+            <targetReference>Email_Candidate_New_Job_Application</targetReference>
         </connector>
         <fields>
             <name>Ask_more_info</name>
@@ -367,7 +387,7 @@
         <name>Personality_Test</name>
         <label>Personality Test</label>
         <locationX>50</locationX>
-        <locationY>890</locationY>
+        <locationY>998</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -432,7 +452,7 @@
         <name>Thank_you</name>
         <label>Thank you</label>
         <locationX>50</locationX>
-        <locationY>1322</locationY>
+        <locationY>1430</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -460,17 +480,11 @@
             <targetReference>Application_Submitted</targetReference>
         </connector>
         <fields>
-            <name>upload_resume_input</name>
-            <extensionName>forceContent:fileUpload</extensionName>
+            <name>upload_attachement_custom</name>
+            <extensionName>c:uploadAttachment</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>label</name>
-                <value>
-                    <stringValue>Upload Resume</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>recordId</name>
+                <name>candidateId</name>
                 <value>
                     <elementReference>Create_Candidate</elementReference>
                 </value>
