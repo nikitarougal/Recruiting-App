@@ -1,0 +1,8 @@
+<template>
+  <lightning-card title="Available Interview Slots">
+    <template if:true={slots}>
+      <lightning-datatable key-field="id" data={slots} columns={columns}>
+      </lightning-datatable>
+    </template>
+  </lightning-card>
+</template>
