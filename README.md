@@ -41,7 +41,7 @@ The Salesforce Recruiting App is a custom application designed to streamline the
 1. Clone the repository.
 
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/nikitarougal/Recruiting-App.git
 
 1. Deploy the Salesforce metadata using Salesforce CLI or any other deployment tool.
 
